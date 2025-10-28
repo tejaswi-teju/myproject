@@ -17,7 +17,7 @@ resource "aws_subnet" "public" {
     vpc_id = aws_vpc.vpc-1.id
     cidr_block = var.public_cidr
     tags = {
-        Name = public
+        Name = "public"
     }
 }
 
@@ -45,8 +45,8 @@ resource "aws_route_table" "public_rtb" {
 ###################################################################
 
 resource "aws_route" "igwroute" {
-    destination_cidr_block = 0.0.0.0/0
-    gateway_id = aws_internet_gateway.id
+    destination_cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.igw.id
     route_table_id = aws_route_table.public_rtb.id
 }
 
@@ -54,15 +54,15 @@ resource "aws_route" "igwroute" {
 # EC2
 ###################################################################
 resource "aws_instance" "server1" {
-    ami = data.aws_ami.ubuntu.id
+    #ami = data.aws_ami.ubuntu.id
+    ami = var.ami_id
     instance_type = "t2.micro"
-    vpc_id = aws_vpc.vpc-1.id
     subnet_id = aws_subnet.public.id
     associate_public_ip_address = "true"
     #key_name = aws_key_pair.mykey.id
-    security_groups = aws_security_group.my-sg1.id
+    security_groups = [aws_security_group.my-sg1.id]
     tags = {
-        Name = server1
+        Name = "server1"
     }
 }
 

@@ -10,3 +10,8 @@ variable "public_cidr" {
     default = "192.168.0.0/28"   
 }
 
+variable "ami_id" {
+  description = "ami for ec2"
+  type = string
+  default = "ami-0279a86684f669718"
+}
