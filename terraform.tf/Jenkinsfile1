@@ -22,5 +22,26 @@ pipeline {
                 }
             }
         }
+
+        stage ("Passwordless authentication") {
+            steps {
+                script {
+                    sh '''
+                    # Creating .ssh folder with execute permissions
+                    mkdir -p ~/.ssh
+                    chmod 700 ~/.ssh
+
+                    # Generating ssh keys
+                    ssh-keygen -t rsa -b 4096 -N "" -f ~/.ssh/id_rsa <<< y >/dev/null 2>&1
+                    echo "ssh key generated successfully"
+
+                    # Copy the public key to each host in inventory file
+                    for host in $(grep -v "^\\[" /tmp/inventory.ini); do
+                        sshpass -p "${TARGET_PASS}" ssh-copy-id -o StrictHostKeyChecking=no ${TARGET_USER}@$host
+                    done
+                    '''
+                }
+            }
+        }
     }
 }
