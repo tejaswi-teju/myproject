@@ -37,14 +37,14 @@ pipeline {
 
         stage ("terraform plan") {
             steps {
-                sh "cd terraform.tf && terraform plan"
+                sh "cd terraform.tf && terraform plan -out=tfplan"
             }
         }
 
         stage ("Terraform apply") {
             steps {
                 input message: "Proceed with terraform apply ?"
-                sh "terraform apply"
+                sh "terraform apply tfplan"
             }
         }
     }
