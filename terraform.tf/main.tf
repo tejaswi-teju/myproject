@@ -70,7 +70,7 @@ resource "aws_instance" "server1" {
 # AMI SELECTION
 ###################################################################
 
-data "aws_ami" "ubuntu" {
+/*data "aws_ami" "ubuntu" {
   most_recent = true
   owners = ["self"]
 
@@ -83,7 +83,7 @@ data "aws_ami" "ubuntu" {
     name   = "virtualization-type"
     values = ["hvm"]
   }
-} 
+} */
 
 ###################################################################
 # CREATING KEY PAIR
