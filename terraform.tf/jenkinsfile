@@ -16,26 +16,27 @@ pipeline {
 
         stage ("Terraform init") {
             steps{
+                dir("terraform.tf") {
                 sh "terraform init"
+                }
             }
         }
 
         stage ("Terraform fmt & validate") {
             steps {
-                sh "terraform fmt"
-                sh "terraform validate"
+                sh "cd terraform.tf && terraform fmt && terraform validate"
             }
         }
 
         stage ("terraform plan") {
             steps {
-                sh "terraform plan"
+                sh "cd terraform.tf && terraform plan"
             }
         }
 
         stage ("Terraform apply") {
             steps {
-                input "Proceed with terraform apply ?"
+                input message: "Proceed with terraform apply ?"
                 sh "terraform apply"
             }
         }
