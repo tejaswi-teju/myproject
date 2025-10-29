@@ -32,7 +32,7 @@ pipeline {
                     chmod 700 ~/.ssh
 
                     # Generating ssh keys
-                    ssh-keygen -t rsa -b 4096 -N "" -f ~/.ssh/id_rsa <<< y >/dev/null 2>&1
+                    yes | ssh-keygen -t rsa -b 4096 -N "" -f ~/.ssh/id_rsa 
                     echo "ssh key generated successfully"
 
                     # Copy the public key to each host in inventory file
