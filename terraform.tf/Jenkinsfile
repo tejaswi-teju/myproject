@@ -47,6 +47,12 @@ pipeline {
                 sh "cd terraform.tf && terraform apply --auto-approve"
             }
         }
+
+        stage ("Terraform destroy") {
+            steps {
+                sh "cd terraform.tf && terraform destroy --auto-approve"
+            }
+        }
     }
     
     
