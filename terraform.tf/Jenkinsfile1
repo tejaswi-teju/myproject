@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+
+    parameters {
+        string(name: 'TARGET_USER', defaultValue: 'vmuser', description: 'Target VM SSH username')
+        password parameter(name: 'TARGET_PASS', defaultValue: 'YourPasswordHere', description: 'Target VM password (used once to setup passwordless)')
+        multi string(name: 'Inventory', defaultValue: '', description: 'List of target VM IPs, one per line')
+    }
+
+    stages {
+        stage ("Target VMs are added to ansible inventory.ini file") {
+            steps {
+                script {
+                    sh '''
+                    echo "[dev]" > /tmp/inventory.ini
+                    IFS=$'\\n'
+                    for ip in $Inventory; do
+                        echo "$ip" >> /tmp/inventory.ini
+                    done
+                    echo "Inventory file ready"
+                    '''
+                }
+            }
+        }
+    }
+}
