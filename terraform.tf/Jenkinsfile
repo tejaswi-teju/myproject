@@ -44,7 +44,7 @@ pipeline {
         stage ("Terraform apply") {
             steps {
                 input message: "Proceed with terraform apply ?"
-                sh "terraform apply"
+                sh "cd terraform.tf && terraform apply"
             }
         }
     }
