@@ -3,8 +3,8 @@ pipeline {
 
     parameters {
         string(name: 'TARGET_USER', defaultValue: 'vmuser', description: 'Target VM SSH username')
-        password parameter(name: 'TARGET_PASS', defaultValue: 'YourPasswordHere', description: 'Target VM password (used once to setup passwordless)')
-        multi string(name: 'Inventory', defaultValue: '', description: 'List of target VM IPs, one per line')
+        password(name: 'TARGET_PASS', defaultValue: 'YourPasswordHere', description: 'Target VM password (used once to setup passwordless)')
+        text(name: 'Inventory', defaultValue: '', description: 'List of target VM IPs, one per line')
     }
 
     stages {
