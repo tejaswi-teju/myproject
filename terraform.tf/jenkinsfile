@@ -1,0 +1,50 @@
+pipeline {
+    agent any
+
+    environment {
+        AWS_ACCESS_KEY_ID = credentials("aws-access-key")
+        AWS_SECRET_ACCESS_KEY = credentials("aws-secret-key")
+    }
+
+    stages {
+        stage ("checkout scm") {
+            steps {
+                git "https://github.com/tejaswi-teju/myproject.git"
+            }
+
+        }
+
+        stage ("Terraform init") {
+            steps{
+                sh "terraform init"
+            }
+        }
+
+        stage ("Terraform fmt & validate") {
+            steps {
+                sh "terraform fmt"
+                sh "terraform validate"
+            }
+        }
+
+        stage ("terraform plan") {
+            steps {
+                sh "terraform plan"
+            }
+        }
+
+        stage ("Terraform apply") {
+            steps {
+                input "Proceed with terraform apply ?"
+                sh "terraform apply"
+            }
+        }
+    }
+    
+    
+    post {
+        success {
+            echo "Build successful. Infra launched through Terraform"
+        }
+    }
+}
