@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+
+    stages {
+        stage ("checkout scm") {
+            steps {
+                git "https://github.com/tejaswi-teju/myproject.git"
+            }
+        }
+
+        stage () {
+            steps ("Build Dockerfile") {
+
+            }
+        }
+    }
+}
