@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>This is nginx server</h1>
+
+<p>Hi from nginx server</p>
+
+</body>
+</html>
