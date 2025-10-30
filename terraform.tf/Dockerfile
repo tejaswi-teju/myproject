@@ -3,7 +3,7 @@ FROM ubuntu:latest
 LABEL maintainer="teja@gmail.com"
 
 # Installing required packages
-RUN apt update && apt upgrade && install nginx -y
+RUN apt update && apt upgrade -y && install nginx -y
 
 # Copy index.html file into container
 COPY index.html /var/www/html/index.html
