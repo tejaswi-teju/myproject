@@ -10,8 +10,14 @@ pipeline {
 
         stage () {
             steps ("Build Dockerfile") {
-
+                sh "docker build -t myapp:latest ."
             }
+        }
+
+        /*stage ("Push Image to AWS ECR") {
+            steps {
+                sh ""
+            }*/
         }
     }
 }
