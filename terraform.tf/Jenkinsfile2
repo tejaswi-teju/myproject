@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_USER = credentials("dockerhub-credentials")
+        DOCKERHUB_CREDENTIALS = credentials("dockerhub-credentials")
         IMAGE = "tejaswi4268/myproject"
         TAG = "latest"
     }
@@ -25,7 +25,7 @@ pipeline {
             steps {
                 sh '''
                 docker tag myapp:latest $IMAGE:$TAG
-                echo "$DOCKERHUB_PSW" | docker login -u "$DOCKERHUB_USR" --password-stdin
+                echo "$DOCKERHUB_CREDENTIALS_PSW" | docker login -u "$DOCKERHUB_CREDENTIALS_USR" --password-stdin
                 docker push $IMAGE:$TAG
                 '''
             }
