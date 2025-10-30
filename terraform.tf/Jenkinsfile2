@@ -23,9 +23,10 @@ pipeline {
 
         stage ("Push to Dockerhub") {
             steps {
+                #docker login -u $DOCKERHUB_USR -p $DOCKERHUB_PSW # this cmd uses interative terminal which is not possible in jenkins
                 sh '''
                 docker tag myapp:latest $IMAGE:$TAG
-                docker login -u $DOCKERHUB_USR -p $DOCKERHUB_PSW
+                echo "$DOCKERHUB_PSW" | docker login -u "$DOCKERHUB_USR" --password-stdin
                 docker push $IMAGE:$TAG
                 '''
             }
