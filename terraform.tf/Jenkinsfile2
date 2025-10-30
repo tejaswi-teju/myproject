@@ -10,7 +10,7 @@ pipeline {
 
         stage ("Build Dockerfile") {
             steps {
-                sh "docker build -t myapp:latest ./terraform.tf"
+                sh "docker build -t myapp:latest ."
             }
         }
 
