@@ -1,6 +1,13 @@
 pipeline {
     agent any
 
+    environment {
+        DOCKERHUB_USER = credentials()
+        IMAGE = "tejaswi4268/myproject"
+        TAG = "latest"
+    }
+    
+
     stages {
         stage ("checkout scm") {
             steps {
@@ -11,6 +18,16 @@ pipeline {
         stage ("Build Dockerfile") {
             steps {
                 sh "docker build -t myapp:latest ./terraform.tf"
+            }
+        }
+
+        stage ("Push to Dockerhub") {
+            steps {
+                sh '''
+                docker tag myapp:latest $IMAGE:$TAG
+                docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PWD
+                docker push $IMAGE:$TAG
+                '''
             }
         }
 
