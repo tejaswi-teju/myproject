@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_USER = credentials()
+        DOCKERHUB_USER = credentials("dockerhub-credentials")
         IMAGE = "tejaswi4268/myproject"
         TAG = "latest"
     }
