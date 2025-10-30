@@ -6,7 +6,7 @@ LABEL maintainer="teja@gmail.com"
 RUN apt update && apt upgrade -y && apt install nginx -y
 
 # Copy index.html file into container
-COPY terraform.tf/index.html /var/www/html/index.html
+COPY ./terraform.tf/index.html /var/www/html/index.html
 
 # Opening the port for webserver to allow HTTP traffic
 EXPOSE 80
