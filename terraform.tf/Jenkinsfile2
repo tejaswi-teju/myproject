@@ -8,8 +8,8 @@ pipeline {
             }
         }
 
-        stage () {
-            steps ("Build Dockerfile") {
+        stage ("Build Dockerfile") {
+            steps {
                 sh "docker build -t myapp:latest ."
             }
         }
