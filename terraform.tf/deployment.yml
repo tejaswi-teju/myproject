@@ -4,11 +4,11 @@
   become : yes
 
   vars :
-    image = ''
-    tag = ''
-    container_name = ''
-    container_port = ''
-    host_port = ''
+    image : ''
+    tag : ''
+    container_name : ''
+    container_port : ''
+    host_port : ''
 
   tasks:
     - name: pull image from dockerhub
