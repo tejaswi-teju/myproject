@@ -47,7 +47,7 @@ pipeline {
         }*/
         stage ("deploy to EC2 instance") {
             steps{
-                sh "ansible-playbook -i /etc/ansible/inventory.ini terraform.tf/deployment.yml --extra-vars 'image=${IMAGE} container_name=${CONTAINER_NAME} host_port=${HOST_PORT} container_port=${CONTAINER_PORT}'"
+                sh "ansible-playbook -i /etc/ansible/inventory.ini terraform.tf/deployment.yml --extra-vars 'image=${IMAGE} tag=${TAG} container_name=${CONTAINER_NAME} host_port=${HOST_PORT} container_port=${CONTAINER_PORT}'"
             }
         }
     }
