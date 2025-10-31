@@ -25,7 +25,7 @@
 
     - name : Add docker repository to apt resources
       apt_repository :
-        url : deb https://download.docker.com/linux/ubuntu focal stable
+        repo : deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
         state : present
 
     - name : Install docker from Docker repo instead of the default Ubuntu repo
