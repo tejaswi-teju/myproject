@@ -12,4 +12,4 @@ COPY index.html /var/www/html/index.html
 EXPOSE 80
 
 # Start nginx service
-CMD ['nginx','-g','daemon off;']
+CMD ["nginx", "-g", "daemon off;"]
