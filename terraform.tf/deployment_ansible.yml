@@ -1,0 +1,45 @@
+---
+- name : Deployment in EC2 instances using Ansible (no jenkins at all)
+  hosts : dev
+  user : ubuntu
+  become : yes
+
+  tasks :
+    - name : Update and Upgrade ubuntu machine
+      apt :
+        update_cache : yes
+        force_apt_get : yes
+
+    - name : Install dependencies for docker (required for using official docker stable version)
+      apt :
+        name :
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+
+    - name : Add GPG Key for official docker repository to your system
+      apt_key :
+        url : https://download.docker.com/linux/ubuntu/gpg
+        state : present
+
+    - name : Add docker repository to apt resources
+      apt_repository :
+        url : deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
+        state : present
+
+    - name : Install docker from Docker repo instead of the default Ubuntu repo
+      apt :
+        name : docker-ce
+        state : present
+        update_cache : yes
+    
+    - name : Start Docker service
+      systemd :
+        name : docker
+        state : started
+        enabled : yes
+
+    
+
+
