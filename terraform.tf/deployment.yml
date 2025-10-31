@@ -20,4 +20,4 @@
              docker rm -rf {{container_name}} || true
 
     - name: Run container with newly pulled image
-      shell: docker run -d --name {{container_name}} -p {{host_port}}:{{container_port}} {{image}}:{tag}
+      shell: docker run -d --name {{container_name}} -p {{host_port}}:{{container_port}} {{image}}:{{tag}}
