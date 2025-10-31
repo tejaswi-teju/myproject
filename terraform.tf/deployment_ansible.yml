@@ -4,6 +4,11 @@
   user : ubuntu
   become : yes
 
+  vars:
+    IMAGE : 'tejaswi4268/myproject'
+    TAG : 'latest'
+    CONTAINER_NAME : 'my-own-container'
+
   tasks :
     - name : Update and Upgrade ubuntu machine
       apt :
@@ -39,6 +44,17 @@
         name : docker
         state : started
         enabled : yes
+
+    - name : Pull Custom Image from my dockerhub
+      shell : docker pull {{IMAGE}}:{{TAG}} 
+
+    - name : Remove any container running with same name but old version
+      shell : |
+        docker stop {{CONTAINER_NAME}} || true
+        docker rm -f {{CONTAINER_NAME}} || true
+
+    - name : Run docker container on slave EC2 instance
+      shell : docker run -d --name {{CONTAINER_NAME}} -p 8080:80 {{IMAGE}}:{{TAG}}
 
     
 
