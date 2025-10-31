@@ -1,6 +1,7 @@
 ---
 - name: Deployment to EC2 instance
   hosts : dev
+  user : ubuntu
   become : yes
 
   vars :
