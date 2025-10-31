@@ -16,8 +16,9 @@
       shell : docker pull {{image}}:{{tag}} 
 
     - name: stop and remove old version containers
-      shell: docker stop {{container_name}} || true
-             docker rm -f {{container_name}} || true
+      shell: | 
+          docker stop {{container_name}} || true
+          docker rm -f {{container_name}} || true
 
     - name: Run container with newly pulled image
       shell: docker run -d --name {{container_name}} -p {{host_port}}:{{container_port}} {{image}}:{{tag}}
