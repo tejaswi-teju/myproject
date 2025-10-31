@@ -1,0 +1,22 @@
+---
+- name: Deployment to EC2 instance
+  hosts : dev
+  become : yes
+
+  vars :
+    image = ''
+    tag = ''
+    container_name = ''
+    container_port = ''
+    host_port = ''
+
+  tasks:
+    - name: pull image from dockerhub
+      shell : docker pull {{image}}:{{tag}} 
+
+    - name: stop and remove old version containers
+      shell: docker stop {{container_name}} || true
+             docker rm -rf {{container_name}} || true
+
+    - name: Run container with newly pulled image
+      shell: docker run -d --name {{container_name}} -p {{host_port}}:{{container_port}} {{image}}:{tag}

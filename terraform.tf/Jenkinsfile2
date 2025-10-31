@@ -5,6 +5,9 @@ pipeline {
         DOCKERHUB_CREDENTIALS = credentials("dockerhub-credentials")
         IMAGE = "tejaswi4268/myproject"
         TAG = "latest"
+        CONTAINER_NAME = "my-own-container"
+        CONTAINER_PORT  = "80"
+        HOST_PORT = "8080"
     }
     
 
@@ -24,8 +27,14 @@ pipeline {
         stage ("Push to Dockerhub") {
             steps {
                 sh '''
+
+                # tag the local image with dockerhub user and repo names
                 docker tag myapp:latest $IMAGE:$TAG
+
+                # login to dockehub 
                 echo "$DOCKERHUB_CREDENTIALS_PSW" | docker login -u "$DOCKERHUB_CREDENTIALS_USR" --password-stdin
+                
+                # Push the image to dockerhub
                 docker push $IMAGE:$TAG
                 '''
             }
@@ -36,5 +45,10 @@ pipeline {
                 sh ""
             }
         }*/
+        stage ("deploy to EC2 instance") {
+            steps{
+                sh "ansible-playbook -i inventory.ini deployment.yml --extra-vars 'image=${IMAGE} container_name=${CONTAINER_NAME} host_port=${HOST_PORT} container_port=${CONTAINER_PORT}'"
+            }
+        }
     }
 }
