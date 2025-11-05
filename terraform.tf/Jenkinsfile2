@@ -56,8 +56,8 @@ pipeline {
             steps{
                 sh '''
                 export KUBECONFIG=/var/lib/jenkins/.minikube/profiles/minikube/config.json
-                kubectl apply -f nginx_k8s_deployment.yml
-                kubectl apply -f nginx_k8s_service.yml
+                kubectl apply -f $WORKSPACE/terraform.tf/nginx_k8s_deployment.yml
+                kubectl apply -f $WORKSPACE/terraform.tf/nginx_k8s_service.yml
                 '''
             }
         }
