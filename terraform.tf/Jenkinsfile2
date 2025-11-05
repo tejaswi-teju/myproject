@@ -55,7 +55,7 @@ pipeline {
         stage ("deploy to k8s using helm") {
             steps{
                 sh '''
-                export KUBECONFIG=/home/ubuntu/.minikube
+                export KUBECONFIG=/var/lib/jenkins/.minikube
                 kubectl apply -f nginx_k8s_deployment.yml
                 kubectl apply -f nginx_k8s_service.yml
                 '''
