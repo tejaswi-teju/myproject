@@ -3,7 +3,7 @@ appName : nginx-webapp
 container :
   name : nginx-container
 image :
-  name : "tejaswi/myproject"
+  name : "tejaswi4268/myproject"
   tag : latest
 
 service :
