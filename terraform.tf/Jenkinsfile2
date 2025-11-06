@@ -58,14 +58,14 @@ pipeline {
         stage ("deploy to k8s using helm") {
             steps{
                 sh '''
-                export HOME=/var/lib/jenkins
-                export MINIKUBE_HOME=/var/lib/jenkins
-                mkdir -p $HOME/.minikube
+                #export HOME=/var/lib/jenkins
+                #export MINIKUBE_HOME=/var/lib/jenkins
+                #mkdir -p $HOME/.minikube
 
-                minikube start --driver=docker --force
+                #minikube start --driver=docker --force
 
-                minikube kubectl -- apply -f $WORKSPACE/terraform.tf/nginx_k8s_deployment.yml
-                minikube kubectl -- apply -f $WORKSPACE/terraform.tf/nginx_k8s_service.yml
+                kubectl apply -f $WORKSPACE/terraform.tf/nginx_k8s_deployment.yml
+                kubectl apply -f $WORKSPACE/terraform.tf/nginx_k8s_service.yml
                 '''
             }
         }
