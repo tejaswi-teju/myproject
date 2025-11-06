@@ -72,7 +72,7 @@ pipeline {
 
         stage ("Deploy to k8s using helm") {
             steps{
-                sh 'helm install --kubeconfig=/var/lib/jenkins/.kube/config my-webapp $WORKSPACE/terraform.tf/nginx-deployment'
+                sh 'helm upgrade --kubeconfig=/var/lib/jenkins/.kube/config my-webapp $WORKSPACE/terraform.tf/nginx-deployment'
             }
         }
     }
