@@ -60,8 +60,9 @@ pipeline {
                 sh '''
                 export HOME=/var/lib/jenkins
                 export MINIKUBE_HOME=/var/lib/jenkins
+                mkdir -p $HOME/.minikube
 
-                minikube start --driver=docker
+                minikube start --driver=docker --force
 
                 minikube kubectl -- apply -f $WORKSPACE/terraform.tf/nginx_k8s_deployment.yml
                 minikube kubectl -- apply -f $WORKSPACE/terraform.tf/nginx_k8s_service.yml
