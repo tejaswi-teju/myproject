@@ -8,6 +8,9 @@ pipeline {
         CONTAINER_NAME = "my-own-container"
         CONTAINER_PORT  = "80"
         HOST_PORT = "8080"
+        KUBECONFIG = '/var/lib/jenkins/.minikube/profiles/minikube/config.json'
+        HOME = '/var/lib/jenkins'
+        MINIKUBE_HOME = '/var/lib/jenkins'
     }
     
 
@@ -55,7 +58,6 @@ pipeline {
         stage ("deploy to k8s using helm") {
             steps{
                 sh '''
-                export KUBECONFIG=/var/lib/jenkins/.minikube/profiles/minikube/config.json
                 kubectl apply -f $WORKSPACE/terraform.tf/nginx_k8s_deployment.yml
                 kubectl apply -f $WORKSPACE/terraform.tf/nginx_k8s_service.yml
                 '''
