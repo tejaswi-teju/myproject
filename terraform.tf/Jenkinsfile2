@@ -58,8 +58,8 @@ pipeline {
         stage ("deploy to k8s using helm") {
             steps{
                 sh '''
-                minikube -p minikube kubectl apply -f $WORKSPACE/terraform.tf/nginx_k8s_deployment.yml
-                minikube -p minikube kubectl apply -f $WORKSPACE/terraform.tf/nginx_k8s_service.yml
+                minikube -p minikube kubectl -- apply -f $WORKSPACE/terraform.tf/nginx_k8s_deployment.yml
+                minikube -p minikube kubectl -- apply -f $WORKSPACE/terraform.tf/nginx_k8s_service.yml
                 '''
             }
         }
