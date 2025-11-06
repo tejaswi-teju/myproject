@@ -1,13 +1,13 @@
 apiVersion : apps/v1
 kind : Service
 metadata :
-  name : nginx_service
+  name : nginx-service
   labels :
-    app : nginx_webapp
+    app : nginx-webapp
 
   spec :
     selector :
-      app : nginx_webapp
+      app : nginx-webapp
     ports :
       - protocol : TCP
         port : 80
