@@ -18,7 +18,7 @@ spec :
     spec :
       containers :
         - name : nginx-container
-          image : "tejaswi4268/latest"
+          image : "tejaswi4268/myproject:latest"
           ports :
             - containerPort : 80
           resources :
