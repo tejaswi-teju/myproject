@@ -1,0 +1,11 @@
+appName : nginx-webapp
+
+container :
+  name : nginx-container
+image :
+  name : "tejaswi/myproject"
+  tag : latest
+
+service :
+  name : nginx-service
+  type : NodePort
