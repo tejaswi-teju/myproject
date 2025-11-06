@@ -64,8 +64,8 @@ pipeline {
 
                 #minikube start --driver=docker --force
 
-                kubectl apply -f nginx_k8s_deployment.yml
-                kubectl apply -f nginx_k8s_service.yml
+                kubectl --kubeconfig=/var/lib/jenkins/.kube/config apply -f $WORKSPACE/terraform.tf/nginx_k8s_deployment.yml
+                kubectl --kubeconfig=/var/lib/jenkins/.kube/config apply -f $WORKSPACE/terraform.tf/nginx_k8s_service.yml
                 '''
             }
         }
