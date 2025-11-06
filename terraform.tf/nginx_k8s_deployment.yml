@@ -20,7 +20,7 @@ spec :
         - name : nginx-container
           image : "tejaswi4268/latest"
           ports :
-            - conrainerPort : 80
+            - containerPort : 80
           resources :
             requests : 
               memory : "128Mi"
@@ -28,13 +28,13 @@ spec :
             limits : 
               memory : "256Mi"
               cpu : "400m"
-          livelinessProbe :
+          livenessProbe :
             httpGet :
               path : /
               port : 80
             initialDelaySeconds : 30
             periodSeconds : 10
-          readynessProbe :
+          readinessProbe :
             httpGet :
               path : /
               port : 80
